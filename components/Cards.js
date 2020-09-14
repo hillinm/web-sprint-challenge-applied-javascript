@@ -37,7 +37,7 @@ function addCard(obj) {
     author.classList.add(`author`);
     imgContainer.classList.add(`img-container`)
 
-    imgContainer.src = obj.authorPhoto;
+    img.src = obj.authorPhoto;
     headline.textContent = obj.headline;
     authorsName.textContent = `By: ${obj.authorName}`;
 
