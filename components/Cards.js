@@ -55,11 +55,16 @@ axios.get(`https://lambda-times-api.herokuapp.com/articles`)
     .then((response) => {
         console.log(response)
         const articles = Object.values(response.data.articles);
-        console.log(articles)
-        articles.forEach ((item) => {
-                container.appendChild(addCard(item))
+        var i;
+        for (i = 0; i < articles.length; i++) {
+            const array = articles[i]
+            console.log(array)
+            array.forEach((item) => {
+                console.log(item)
+                container.appendChild(addCard(item));
             })
-        })
+        }
+    })
     
     .catch((err) => console.log(err));
 
