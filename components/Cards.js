@@ -27,29 +27,40 @@ function addCard(obj) {
     const card = document.createElement(`div`);
     const headline = document.createElement(`div`);
     const author = document.createElement(`div`);
-    const imgContainer = document.createElement(`img`);
+    const imgContainer = document.createElement(`div`);
+    const img = document.createElement(`img`);
     const authorsName = document.createElement(`span`);
 
     card.classList.add(`card`);
     headline.classList.add(`headline`);
     author.classList.add(`author`);
+    imgContainer.classList.add(`img-container`)
 
     imgContainer.src = obj.authorPhoto;
-    headline.textContent = "TEST";
+    headline.textContent = obj.headline;
     authorsName.textContent = `By: ${obj.authorName}`;
+
+    card.appendChild(headline);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    imgContainer.appendChild(img);
+    card.appendChild(authorsName);
 
     headline.addEventListener('click', () => {
         console.log(`${obj.headline}`)
     })
 }
 
-axios.get(`https://lambda-times-api.herokuapp.com/articles`).then((r) => {
-    console.log(r.data)
-    container.prepend(addCard(r.data))
-    console.log(r.data.articles.bootstrap[0].headline);
-    container.append(addCard(r.data))
-    container.append(addCard(r.data.articles.bootstrap))
-  })
-  .catch ((err) => console.log(err));
+axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+    .then((response) => {
+        console.log(response)
+        const articles = Object.values(response.data.articles);
+        console.log(articles)
+        articles.forEach ((item) => {
+                container.appendChild(addCard(item))
+            })
+        })
+    
+    .catch((err) => console.log(err));
 
   
