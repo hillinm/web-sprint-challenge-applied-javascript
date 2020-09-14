@@ -25,13 +25,9 @@ function addTopic (obj) {
 
 axios.get(`https://lambda-times-api.herokuapp.com/topics`)
 .then((response) => {
-    const array = response.data.topics
-    
-    var i;
-    for (i = 0; i < array.length; i++){
-        console.log(response.data.topics[i])
-        topics.appendChild(addTopic(response.data.topics[i]))
-    }
+    response.data.topics.forEach (element => {
+        topics.appendChild(addTopic(element));
+    })
 })
 
 .catch((err) => console.log(err));

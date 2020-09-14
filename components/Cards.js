@@ -34,8 +34,8 @@ function addCard(obj) {
     headline.classList.add(`headline`);
     author.classList.add(`author`);
 
-    imgContainer.src = `${obj.authorPhoto}`;
-    headline.textContent = `${obj.headline}`;
+    imgContainer.src = obj.authorPhoto;
+    headline.textContent = "TEST";
     authorsName.textContent = `By: ${obj.authorName}`;
 
     headline.addEventListener('click', () => {
@@ -44,9 +44,11 @@ function addCard(obj) {
 }
 
 axios.get(`https://lambda-times-api.herokuapp.com/articles`).then((r) => {
+    console.log(r.data)
     container.prepend(addCard(r.data))
     console.log(r.data.articles.bootstrap[0].headline);
     container.append(addCard(r.data))
+    container.append(addCard(r.data.articles.bootstrap))
   })
   .catch ((err) => console.log(err));
 
