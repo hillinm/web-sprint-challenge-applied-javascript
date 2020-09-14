@@ -1,3 +1,4 @@
+import axios from 'axios';
 // STEP 3: Create article cards.
 // -----------------------
 // Send an HTTP GET request to the following address: https://lambda-times-api.herokuapp.com/articles
@@ -49,6 +50,7 @@ function addCard(obj) {
     headline.addEventListener('click', () => {
         console.log(`${obj.headline}`)
     })
+    return card
 }
 
 axios.get(`https://lambda-times-api.herokuapp.com/articles`)
@@ -61,7 +63,8 @@ axios.get(`https://lambda-times-api.herokuapp.com/articles`)
             console.log(array)
             array.forEach((item) => {
                 console.log(item)
-                container.appendChild(addCard(item));
+                console.log(item.headline)
+                container.append(addCard(item));
             })
         }
     })
