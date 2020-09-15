@@ -78,6 +78,5 @@ function showImages() {
   const imagery = images[imageIndex-1]
   imagery.style.display = "block";
   setTimeout(showImages, 2000);
-  gsap.from(imagery, { opacity: 0, x: 0, scaleY: 0.5, scaleX: -0.5, duration: 1.5 });
-  
+  gsap.from(imagery, { opacity: 0, y: 0, duration: 2 });
 }
