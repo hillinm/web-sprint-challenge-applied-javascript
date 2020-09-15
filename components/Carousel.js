@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 /*
   STRETCH GOAL
   STRETCH GOAL
@@ -36,6 +37,10 @@ function makeCarousel () {
   carousel.classList.add(`carousel`);
   leftButton.classList.add(`left-button`);
   rightButton.classList.add(`right-button`)
+  img1.classList.add(`images`);
+  img2.classList.add(`images`);
+  img3.classList.add(`images`);
+  img4.classList.add(`images`);
 
   img1.src = "https://tk-assets.lambdaschool.com/ba687af4-3a1e-43d7-87b2-f30453264c9d_mountains.jpeg";
   img2.src = "https://tk-assets.lambdaschool.com/8aa075b0-67cf-47ce-9a7f-8cc9d754675d_computer.jpeg";
@@ -52,8 +57,27 @@ function makeCarousel () {
   leftButton.textContent = "<";
   rightButton.textContent = ">";
 
-
   return carousel
 }
 
 carouselContainer.appendChild(makeCarousel());
+
+var imageIndex = 0;
+showImages();
+
+function showImages() {
+  var i;
+  var images = document.getElementsByClassName("images");
+  for (i = 0; i < images.length; i++) {
+    images[i].style.display = "none";
+  }
+  imageIndex++;
+  if (imageIndex > images.length) {
+    imageIndex = 1
+  }
+  const imagery = images[imageIndex-1]
+  imagery.style.display = "block";
+  setTimeout(showImages, 2000);
+  gsap.from(imagery, { opacity: 0, x: 0, scaleY: 0.5, scaleX: -0.5, duration: 1.5 });
+  
+}
