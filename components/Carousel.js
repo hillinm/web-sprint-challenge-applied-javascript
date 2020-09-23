@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 /*
   STRETCH GOAL
   STRETCH GOAL
@@ -22,3 +23,60 @@
     <div class="right-button"> > </div>
   </div>
 */
+const carouselContainer = document.querySelector('.carousel-container');
+
+function makeCarousel () {
+  const carousel = document.createElement('div');
+  const leftButton = document.createElement('div');
+  const img1 = document.createElement('img');
+  const img2 = document.createElement('img');
+  const img3 = document.createElement('img');
+  const img4 = document.createElement('img');
+  const rightButton = document.createElement('div');
+
+  carousel.classList.add(`carousel`);
+  leftButton.classList.add(`left-button`);
+  rightButton.classList.add(`right-button`)
+  img1.classList.add(`images`);
+  img2.classList.add(`images`);
+  img3.classList.add(`images`);
+  img4.classList.add(`images`);
+
+  img1.src = "https://tk-assets.lambdaschool.com/ba687af4-3a1e-43d7-87b2-f30453264c9d_mountains.jpeg";
+  img2.src = "https://tk-assets.lambdaschool.com/8aa075b0-67cf-47ce-9a7f-8cc9d754675d_computer.jpeg";
+  img3.src = "https://tk-assets.lambdaschool.com/5b7441c6-6e4b-4feb-a4ec-8dd2eb76238a_trees.jpeg";
+  img4.src = "https://tk-assets.lambdaschool.com/0b770382-d0eb-4465-8bf2-692a79fcda71_turntable.jpeg";
+
+  carousel.appendChild(leftButton);
+  carousel.appendChild(img1)
+  carousel.appendChild(img2)
+  carousel.appendChild(img3)
+  carousel.appendChild(img4)
+  carousel.appendChild(rightButton)
+
+  leftButton.textContent = "<";
+  rightButton.textContent = ">";
+
+  return carousel
+}
+
+carouselContainer.appendChild(makeCarousel());
+
+var imageIndex = 0;
+showImages();
+
+function showImages() {
+  var i;
+  var images = document.getElementsByClassName("images");
+  for (i = 0; i < images.length; i++) {
+    images[i].style.display = "none";
+  }
+  imageIndex++;
+  if (imageIndex > images.length) {
+    imageIndex = 1
+  }
+  const imagery = images[imageIndex-1]
+  imagery.style.display = "block";
+  setTimeout(showImages, 2000);
+  gsap.from(imagery, { opacity: 0, y: 0, duration: 2 });
+}
